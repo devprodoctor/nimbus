@@ -105,15 +105,9 @@ int NIIsInDebugger(void);
 }
 #endif
 
-#if TARGET_IPHONE_SIMULATOR
-#define NIDASSERT(xx) { if (!(xx)) { NIDPRINT(@"NIDASSERT failed: %s", #xx); \
-if (NIDebugAssertionsShouldBreak && NIIsInDebugger()) { __builtin_debugtrap(); } } \
-} ((void)0)
-#else
 #define NIDASSERT(xx) { if (!(xx)) { NIDPRINT(@"NIDASSERT failed: %s", #xx); \
 if (NIDebugAssertionsShouldBreak && NIIsInDebugger()) { raise(SIGTRAP); } } \
 } ((void)0)
-#endif // #if TARGET_IPHONE_SIMULATOR
 
 #else
 #define NIDASSERT(xx) ((void)0)
